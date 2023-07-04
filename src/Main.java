@@ -55,7 +55,6 @@ public class Main {
            else {System.out.println("Ошибка ввода данных");
            }
         }
-
     }
 public static int couNter(int num1, int num2, char oper) {
     int result1 = 1;
