@@ -2,60 +2,69 @@ import java.util.Scanner;
 
 
 public class Main {
-    public static void main(String[] args) {
-        int i = 0, number1, number2;
-        char operation = '0';
-        int result = 0;
+    public static void main(String args[]) {
         Scanner in = new Scanner(System.in);
         System.out.print("Введите арифметическое действие (+,-,/,*) с двумя числами арабского или римского исчисления от 1 до 10 включительно и нажмите ввод: ");
         String str = in.nextLine();
-        char[] strmass = new char[10];
-        for (i = 0; i < str.length(); i++) {
-            strmass[i] = str.charAt(i);
-            if (strmass[i] =='+') {
-                operation = '+';
+        String resultend = calc(str);
+        System.out.println("Результат равен :" + resultend);
+    }
+
+        public static String calc(String input) {
+            int i=0, number1, number2;
+            char operation = '0';
+            int result = 0;
+            char[] strmass = new char[10];
+            for (i = 0; i < input.length(); i++) {
+                strmass[i] = input.charAt(i);
+                if (strmass[i] == '+') {
+                    operation = '+';
+                }
+                if (strmass[i] == '-') {
+                    operation = '-';
+                }
+                if (strmass[i] == '*') {
+                    operation = '*';
+                }
+                if (strmass[i] == '/') {
+                    operation = '/';
+                }
             }
-            if (strmass[i] == '-') {
-                operation = '-';
+            if (operation == '0') {
+                System.out.println("Ошибка ввода данных");//прерывание исключение
             }
-            if (strmass[i] == '*') {
-                operation = '*';
-            }
-            if (strmass[i] == '/') {
-                operation = '/';
-            }
-        }
-        if (operation == '0') {
-            System.out.println("Ошибка ввода данных");
-        return;}
-        String strmassString = String.valueOf(strmass);
-        String[] numbers = strmassString.split("[+-/*]");
-        String num00 = numbers[0].trim();
-        String num01 = numbers[1].trim();
-        number1 = romanToarab(num00);
-        number2 = romanToarab(num01);
-        if (0 < number1 && 0 < number2) {
-            result = couNter (number1, number2, operation);
+            String strmassString = String.valueOf(strmass);
+            String[] numbers = strmassString.split("[+-/*]");
+            String num00 = numbers[0].trim();
+            String num01 = numbers[1].trim();
+            number1 = romanToarab(num00);
+            number2 = romanToarab(num01);
+            if (0 < number1 && 0 < number2) {
+                result = couNter(number1, number2, operation);
             if (result < 0) {
                 System.out.println("Результат действий с римскими числами отрицательный ");
-            }
-            else {
-                String result2 = arabToroma(result);
-                System.out.println("Результат для римских цифр :" + result2);}
-
-        } else {if ((number1 < 0 && number2 >0) || (number2 < 0 && number1>0)) {
+                //  прерывание исключение сделать
+            } else {
+                String result3 = arabToroma(result);
+                return result3;
+                // System.out.println("Результат для римских цифр :" + result3);}
+            } }
+            if ((number1 < 0 && number2 > 0) || (number2 < 0 && number1 > 0)) {
+                        System.out.println("Ошибка ввода данных");// прерывание исключение
+                    }
+                    number1 = Integer.parseInt(num00);
+                    number2 = Integer.parseInt(num01);
+                    if (number1 >= 1 && number1 <= 10 && number2 >= 1 && number2 <= 10) {
+                       result = couNter(number1, number2, operation);
+                       String result3 = String.valueOf(result);
+                       return result3;
+                    }
             System.out.println("Ошибка ввода данных");
-            return;
-        }
-           number1 = Integer.parseInt(num00);
-           number2 = Integer.parseInt(num01);
-           if (number1 >= 1 && number1 <= 10 && number2 >=1 && number2 <= 10) {
-           result = couNter(number1, number2, operation);
-            System.out.println("Результат для арабских цифр :" + result);}
-           else {System.out.println("Ошибка ввода данных");
-           }
-        }
+    return null;// прерывание через исключение
     }
+
+
+
 public static int couNter(int num1, int num2, char oper) {
     int result1 = 1;
     switch (oper) {
@@ -112,6 +121,8 @@ public static int couNter(int num1, int num2, char oper) {
         };
         String result3 = res[x];
         return result3;
+    }
+}
 
         /*switch (x) {
             case (1):
@@ -157,6 +168,6 @@ public static int couNter(int num1, int num2, char oper) {
 
         }
         return ("0");*/
-    }
-    }
+
+
 
