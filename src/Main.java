@@ -1,20 +1,29 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 
 public class Main {
+    private static String input;
+
     public static void main(String args[]) {
         Scanner in = new Scanner(System.in);
         System.out.print("Введите арифметическое действие (+,-,/,*) с двумя числами арабского или римского исчисления от 1 до 10 включительно и нажмите ввод: ");
-        String str = in.nextLine();
-        String resultend = calc(str);
-        System.out.println("Результат равен :" + resultend);
+        String input = in.nextLine();
+        String resultend = calc(input);
+        System.out.println("Результат арифметического действия:" + resultend);
     }
 
         public static String calc(String input) {
-            int i=0, number1, number2;
+            int i = 0, number1, number2;
             char operation = '0';
             int result = 0;
             char[] strmass = new char[10];
+           String[] z = input.split("[+-/*]");
+           System.out.println(Arrays.toString(z));
+           int v = z.length;
+           if  (v > 2) {
+           return "Не верное арифметическое действие ";
+           }
             for (i = 0; i < input.length(); i++) {
                 strmass[i] = input.charAt(i);
                 if (strmass[i] == '+') {
@@ -28,11 +37,10 @@ public class Main {
                 }
                 if (strmass[i] == '/') {
                     operation = '/';
-                }
+                } //else { System.out.println("Ошибка ввода данных");//прерывание исключение
             }
-            if (operation == '0') {
-                System.out.println("Ошибка ввода данных");//прерывание исключение
-            }
+            if (operation =='0') {/*System.out.println("ошибка ввода нет арифмет знака");*/
+            return "Отсутствует арифметическая опреация";}// прерывание через исключение
             String strmassString = String.valueOf(strmass);
             String[] numbers = strmassString.split("[+-/*]");
             String num00 = numbers[0].trim();
@@ -42,15 +50,14 @@ public class Main {
             if (0 < number1 && 0 < number2) {
                 result = couNter(number1, number2, operation);
             if (result < 0) {
-                System.out.println("Результат действий с римскими числами отрицательный ");
-                //  прерывание исключение сделать
+                return "Результат с Римскими числами отрицательный";//  прерывание исключение сделать
             } else {
                 String result3 = arabToroma(result);
                 return result3;
                 // System.out.println("Результат для римских цифр :" + result3);}
             } }
             if ((number1 < 0 && number2 > 0) || (number2 < 0 && number1 > 0)) {
-                        System.out.println("Ошибка ввода данных");// прерывание исключение
+                        return "Ошибка ввода данных";// прерывание исключение
                     }
                     number1 = Integer.parseInt(num00);
                     number2 = Integer.parseInt(num01);
@@ -59,8 +66,7 @@ public class Main {
                        String result3 = String.valueOf(result);
                        return result3;
                     }
-            System.out.println("Ошибка ввода данных");
-    return null;// прерывание через исключение
+    return "Ошибка ввода данных";// прерывание через исключение
     }
 
 
@@ -122,52 +128,7 @@ public static int couNter(int num1, int num2, char oper) {
         String result3 = res[x];
         return result3;
     }
+
+
 }
-
-        /*switch (x) {
-            case (1):
-                return ("I");
-            case (2):
-                return ("II");
-            case (3):
-                return ("III");
-            case (4):
-                return ("IV");
-            case (5):
-                return ("V");
-            case (6):
-                return ("VI");
-            case (7):
-                return ("VII");
-            case (8):
-                return ("VIII");
-            case (9):
-                return ("IX");
-            case (10):
-                return ("X");
-            case (11):
-                return ("XI");
-            case (12):
-            return ("XII");
-            case (13):
-                return ("XIII");
-            case (14):
-                return ("XIV");
-            case (15):
-                return ("XV");
-            case (16):
-                return ("XVI");
-            case (17):
-                return ("XVII");
-            case (18):
-                return ("XVIII");
-            case (19):
-                return ("XIX");
-            case (20):
-                return ("XX");
-
-        }
-        return ("0");*/
-
-
 
