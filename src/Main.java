@@ -1,11 +1,10 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 
 public class Main {
     private static String input;
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws Exception {
         Scanner in = new Scanner(System.in);
         System.out.print("Введите арифметическое действие (+,-,/,*) с двумя числами арабского или римского исчисления от 1 до 10 включительно и нажмите ввод: ");
         String input = in.nextLine();
@@ -13,17 +12,17 @@ public class Main {
         System.out.println("Результат арифметического действия:" + resultend);
     }
 
-        public static String calc(String input) {
+        public static String calc(String input) throws Exception {
             int i = 0, number1, number2;
             char operation = '0';
             int result = 0;
             char[] strmass = new char[10];
            String[] z = input.split("[+-/*]");
-           System.out.println(Arrays.toString(z));
+          // System.out.println(Arrays.toString(z));
            int v = z.length;
            if  (v > 2) {
-           return "Не верное арифметическое действие ";
-           }
+               throw new Exception("Не верное арифметическое действие");
+               }
             for (i = 0; i < input.length(); i++) {
                 strmass[i] = input.charAt(i);
                 if (strmass[i] == '+') {
@@ -37,10 +36,10 @@ public class Main {
                 }
                 if (strmass[i] == '/') {
                     operation = '/';
-                } //else { System.out.println("Ошибка ввода данных");//прерывание исключение
+                }
             }
-            if (operation =='0') {/*System.out.println("ошибка ввода нет арифмет знака");*/
-            return "Отсутствует арифметическая опреация";}// прерывание через исключение
+            if (operation =='0') {
+                throw new Exception("Отсутствует арифметическое действие");}
             String strmassString = String.valueOf(strmass);
             String[] numbers = strmassString.split("[+-/*]");
             String num00 = numbers[0].trim();
@@ -50,14 +49,13 @@ public class Main {
             if (0 < number1 && 0 < number2) {
                 result = couNter(number1, number2, operation);
             if (result < 0) {
-                return "Результат с Римскими числами отрицательный";//  прерывание исключение сделать
-            } else {
+                throw new Exception("Результат дейстий с Римскими числами отрицательный");
+                } else {
                 String result3 = arabToroma(result);
                 return result3;
-                // System.out.println("Результат для римских цифр :" + result3);}
             } }
             if ((number1 < 0 && number2 > 0) || (number2 < 0 && number1 > 0)) {
-                        return "Ошибка ввода данных";// прерывание исключение
+                throw new Exception("Ошибка ввода данных");
                     }
                     number1 = Integer.parseInt(num00);
                     number2 = Integer.parseInt(num01);
@@ -65,8 +63,8 @@ public class Main {
                        result = couNter(number1, number2, operation);
                        String result3 = String.valueOf(result);
                        return result3;
+                    } else { throw new Exception("Ошибка ввода данных");
                     }
-    return "Ошибка ввода данных";// прерывание через исключение
     }
 
 
@@ -128,7 +126,8 @@ public static int couNter(int num1, int num2, char oper) {
         String result3 = res[x];
         return result3;
     }
-
-
 }
+
+
+
 
